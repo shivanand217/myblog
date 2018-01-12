@@ -1,317 +1,37 @@
+{% extends 'myblog/base.html' %}
+
+{% load staticfiles %}
+
 <html>
-  <head>
-
-    <title>
-			Shiv Anand Blog
-		</title>
-
-	   <style>
-
-    @import url(https://fonts.googleapis.com/css?family=Nunito);
-
-    html {
-      height: 100%;
-      overflow: hidden;
-    }
-
-    body { 
-      margin:0;
-      padding:0;
-      perspective: 1px;
-      transform-style: preserve-3d;
-      height: 100%;
-      overflow-y: scroll;
-      overflow-x: hidden;
-      font-family: Nunito;
-    }
-
-h1 {
-   font-size: 250%
-}
-
-p {
-  font-size: 140%;
-  line-height: 150%;
-  color: #333;
-}
-
-.slide {
-  position: relative;
-  padding: 25vh 10%;
-  min-height: 100vh;
-  width: 100vw;
-  box-sizing: border-box;
-  box-shadow: 0 -1px 10px rgba(0, 0, 0, .7);
-  transform-style: inherit;
-}
-
-img {
-  position: absolute;
-  top: 50%;
-  left: 35%;
-  width: 320px;
-  height: 240px;
-  transform: translateZ(.25px) scale(.75) translateX(-94%) translateY(-100%) rotate(2deg);
-  padding: 10px;
-  border-radius: 5px;
-  background: rgba(240,230,220, .7);
-  box-shadow: 0 0 8px rgba(0, 0, 0, .7);
-}
-
-img:last-of-type {
-  transform: translateZ(.4px) scale(.6) translateX(-104%) translateY(-40%) rotate(-5deg);
-}
-
-.slide:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left:0;
-  right:0;
-}
-
-.title {
-  width: 50%;
-  padding: 5%;
-  border-radius: 5px;
-  background: rgba(240,230,220, .7);
-  box-shadow: 0 0 8px rgba(0, 0, 0, .7);
-}
-
-.slide:nth-child(2n) .title {
-  margin-left: 0;
-  margin-right: auto;
-}
-
-.slide:nth-child(2n+1) .title {
-  margin-left: auto;
-  margin-right: 0;
-}
-
-.slide, .slide:before {
-  background: 50% 50% / cover;  
-}
-
-.header {
-  text-align: center;
-  font-size: 175%;
-  color: #fff;
-  text-shadow: 0 2px 2px #000;
-}
-
-#title {
-  background-image: url("http://lorempixel.com/640/480/abstract/1/");
-   background-attachment: fixed;  
-}
-
-#slide1:before {
-  background-image: url("https://www.sideshowtoy.com/wp-content/uploads/2017/11/dc-comics-justice-league-batman-statue-prime1-studio-feature-903246-1.jpg");
-  transform: translateZ(-1px) scale(2);
-  z-index:-1;
-}
-
-#slide2 {
-  background-image: url("https://img00.deviantart.net/33d3/i/2012/006/3/b/batman_vs_joker_by_dadethethird-d4lhobk.png");
-  background-attachment: fixed;
-}
-
-#slide3:before {
-  background-image: url("https://img00.deviantart.net/33d3/i/2012/006/3/b/batman_vs_joker_by_dadethethird-d4lhobk.png");
-  transform: translateZ(-1px) scale(2);
-  z-index:-1;
-}
-
-#slide4 {
-  background: #222;
-}
-
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,800,700,300);
-
-@import url(https://fonts.googleapis.com/css?family=Squada+One);
-
-#logo {
-  font-family: 'Open Sans', sans-serif;
-  color: #555;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-size: 150px;
-  font-weight: 800;
-  letter-spacing: -3px;
-  line-height: 1;
-  text-shadow: #EDEDED 3px 2px 0;
-  position: relative;
-}
-
-#logo:after {
-  content:" DAYDREAMER ";
-  position: absolute;
-  left: 8px;
-  top: 32px;
-}
-
-#logo:after {
-
-  background-image: -webkit-linear-gradient(left top, transparent 0%, transparent 25%, #555 25%, #555 50%, transparent 50%, transparent 75%, #555 75%);
-  background-size: 4px 4px;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  z-index: -5;
-  display: block;
-  text-shadow: none;
-}
-
-#menu {
-  width: 1090px;
-  height: 42px;
-  list-style: none;
-  margin: 10px 0 0 0; padding: 25px 10px;
-  border-top: 4px double #AAA;
-  border-bottom: 4px double #AAA;
-  position: relative;
-  text-align: center;
-}
-
-#menu li {
-  display: inline-block;
-  width: 173px;
-  margin: 0 10px;
-  position: relative;
-  -webkit-transform: skewy(-3deg);
-  -webkit-backface-visibility: hidden;
-  -webkit-transition: 200ms all;
-}
-
-#menu li a {
-  text-transform: uppercase;
-  font-family: 'Squada One', cursive;
-  font-weight: 800;
-  display: block;
-  background: #FFF;
-  padding: 2px 10px;
-  color: #333;
-  font-size: 35px;
-  text-align: center;
-  text-decoration: none;
-  position: relative;
-  z-index: 1;
-  text-shadow: 
-    1px 1px 0px #FFF, 
-    2px 2px 0px #999,
-    3px 3px 0px #FFF;
-  background-image: -webkit-linear-gradient(top, transparent 0%, rgba(0,0,0,.05) 100%);
-  -webkit-transition: 1s all;
-  background-image: -webkit-linear-gradient(left top, 
-    transparent 0%, transparent 25%, 
-    rgba(0,0,0,.15) 25%, rgba(0,0,0,.15) 50%, 
-    transparent 50%, transparent 75%, 
-    rgba(0,0,0,.15) 75%);
-  background-size: 4px 4px;
-  box-shadow: 
-    0 0 0 1px rgba(0,0,0,.4) inset, 
-    0 0 20px -5px rgba(0,0,0,.4),
-    0 0 0px 3px #FFF inset;
-}
-
-#menu li:hover {
-  width: 203px;
-  margin: 0 -5px;
-}
-
-#menu a:hover {
-  color: #d90075;
-}
-
-#menu li:after,
-#menu li:before {
-  content: '';
-  position: absolute;
-  width: 50px;
-  height: 100%;
-  background: #BBB;
-  -webkit-transform: skewY(8deg);
-  x-index: -3;
-  border-radius: 4px;
-}
-
-#menu li:after {
-  background-image: -webkit-linear-gradient(left, transparent 0%, rgba(0,0,0,.4) 100%);
-  right: 0;
-  top: -4px; 
-}
-
-#menu li:before {
-  left: 0;
-  bottom: -4px;
-  background-image: -webkit-linear-gradient(right, transparent 0%, rgba(0,0,0,.4) 100%);
-}
-
-   </style>
-  </head>
-	
-	<body>
-    
-
-  <div id="header">
-
-    <a href="/"  id="logo"></a>
-    
-    <ul  id="menu">
-
-      <li><a href="/"><span>Home</span></a></li>
-      <li><a href="/"><span>Tutorials</span></a></li>
-      <li><a href="/"><span>Articles</span></a></li>
-      <li><a href="/"><span>About me</span></a></li>
-      <li><a href="/"><span>Contact</span></a></li>
-    </ul>
-
-  </div>
-
-    <div>
-      <h1><a href="/">......</a></h1>
-    </div>
-
-    <div id="title" class="slide header">
-      <h1 style=""> SHIV ANAND BLOG </h1>
-
-      <h2> Started as my resolution of 2018... <br/>Will continue working on it... after my exams and interviews :P <br/>So stay tuned..</h2>
-    </div>
-
-    <div id="slide1" class="slide">
-      
-      <div class="title">
-        <h1>Ahhaa....</h1>
-        <b><p>The closest a person ever comes to perfection is when he fills out a job application form.</p></b>
-      </div>
-
-    </div>
-
-    <div id="slide2" class="slide">
-      
-      <div class="title">
-        <h1> 2018...begins </h1>
-        <p>
-          
-        </p>
-      </div>
-    
-      <img src="http://lorempixel.com/640/480/abstract/6/">
-      <img src="http://lorempixel.com/640/480/abstract/4/"> 
-    
-    </div>
-
-    <div id="slide3" class="slide">
-      <div class="title">
-        <h1>Have a joke.</h1>
-
-        <b><p>A Canadian psychologist is  selling a video that teaches you how to test your dog’s IQ. Here’s how it works: If you spend $12.99 for the video, your dog  is smarter than you</p></b>
-      </div>
-    </div>
-
-    <div id="slide4" class="slide header">
-        <h1>The End</h1>
-    </div>
-
-    </body>
-
+    <head>
+        <title>Shiv Blog</title>
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+            <link rel="stylesheet" href="{% static 'css/myblog.css' %}">
+            <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    </head>
+        <body>
+            <div class="page-header">
+            <b><h1><a href="/">Eat - Drink - Code</a></h1></b>
+            </div>
+            <div class="content container">
+                <div class="row">
+                    <div class="col-md-8">
+                        {% block content %}
+                        {% for post in posts %}
+                            <div class="post">
+                                <div class="date">
+                                    <p>published: {{ post.published_date }}</p>
+                                </div>
+                                <h1 style="font-family: arial"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+                                <pre style="width:1250px"><code class="language-html"><b><p>{{ post.text }}</p></b><br/><br/></code></pre>
+                                <pre><code class="language-css"> <p>{{ post.code }}</p></code></pre> 
+                            </div>
+                        {% endfor %}
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+            
+        </body>
 </html>
